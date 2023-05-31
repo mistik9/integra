@@ -1,5 +1,6 @@
 import React from "react";
 import './App.css';
+import Help from "./Help";
 
 function Login({ onLogin }) {
   const [email, setEmail] = React.useState("");
@@ -17,7 +18,9 @@ function Login({ onLogin }) {
     setPassword(e.target.value);
   }
   return (
+    <>
       <form class="form" onSubmit={handleSubmit}>
+        
         <label class="form__label">Номер телефона или e-mail</label>
         <input id="login" class="form__input " required value={email} onChange={handleChangeEmail} />
         <label class="form__label">Пароль</label>
@@ -27,7 +30,8 @@ function Login({ onLogin }) {
           <button class="form__button">ОТМЕНА</button>
         </div>
       </form>
-
+      <Help/>
+      </>
   );
 }
 
