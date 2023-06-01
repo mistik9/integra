@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import Login from "./Login.js";
 import User from "./User.js";
-import Help from "./Help.js";
 import auth from "./utils/auth.js";
 
 
@@ -11,12 +10,14 @@ function App() {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [infoMessage, setInfoMessage] = React.useState("");
-
     const [isLoading, setIsLoading] = React.useState(false);
+
 
     //проверка авторизации
     function handleAuthCheck() {
+        console.log(1)
         auth.hasAuth()
+
             .then((res) => {
                 setLoggedIn(true);
             })
@@ -27,6 +28,7 @@ function App() {
 
     //авторизация
     function handleLogin({ email, password }) {
+
         auth.authorize(email, password)
         setIsLoading(true)
             .then((res) => {
@@ -50,14 +52,11 @@ function App() {
 
 
 
+
     return (
-        <div class="page">
-            <Routes>
-                <Route path="/signin" element={<Login onLogin={handleLogin} />} />
-            </Routes>
-            <User email={email} isLoading={isLoading} onLogout={handleLogout} />
-          <Help/>
-        </div>
+
+<Login email={email} infoMessage={infoMessage} loggedIn={loggedIn} onLogin={handleLogin}/>
+      
 
     )
 }

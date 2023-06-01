@@ -4,7 +4,7 @@ class Auth {
     }
 
     authorize(email, password) {
-        return fetch(`${this._baseUrl}//getAuth`, {
+        return fetch(`${this._baseUrl}/getAuth`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ class Auth {
 }
 
 const auth = new Auth({
-    baseUrl: 'https://autoparts-base.ru/dev',
+    baseUrl: 'https://autoparts-base.ru',
 
 });
 export default auth;
