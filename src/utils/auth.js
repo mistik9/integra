@@ -3,13 +3,14 @@ class Auth {
         this._baseUrl = options.baseUrl;
     }
 
-    authorize(email, password) {
+    authorize(login, passw) {
         return fetch(`${this._baseUrl}/getAuth`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ login, passw })
+
         })
             .then(res => {
                 if (res.ok) return res.json();
@@ -21,7 +22,7 @@ class Auth {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                       }
+            }
         })
             .then(res => {
                 if (res.ok) return res.json();

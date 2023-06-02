@@ -24,6 +24,8 @@ visibility: hidden;
   position: relative;
   margin-bottom: 16px;
   padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .user__status_active{
@@ -39,6 +41,10 @@ visibility: hidden;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+}
+
+.form_hidden {
+  visibility: hidden;
 }
 
 .form__label {
@@ -61,6 +67,7 @@ visibility: hidden;
   padding: 0 20px;
   cursor: pointer;
   min-height: 40px;
+  max-width: 140px;
   margin-right: 12px;
   border-style: solid;
   border-width: 1px;
