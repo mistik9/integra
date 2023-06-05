@@ -1,4 +1,3 @@
-
 .page {
   display: block;
   min-height: 400px;
@@ -6,35 +5,54 @@
   margin: 0;
   padding: 20px 25px;
   border-radius: 10px;
-  font-family:  'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   text-align: left;
   font-size: 14;
 }
 
-.user__email {
+.user {
+  border-bottom: 1px solid #c6cdd3;
+  margin-bottom: 16px;
+}
+.user_hidden {
+ display: none;
+}
 
+
+.user__email {
+  font-size: 32px;
+  margin-bottom: 8px;
 }
 .user__email_hidden {
-visibility: hidden;
+  visibility: hidden;
 }
 
 .user__status {
-  border: 1px solid transparent;
-  border-radius: 1px;
+  padding: 0;
   position: relative;
   margin-bottom: 16px;
-  padding: 12px 20px;
   display: flex;
   flex-direction: column;
+  font-size: 16px;
+  padding: 12px 20px;
 }
 
-.user__status_active{
-
+.user__status_active {
+color: #28a745;
 }
+
 .user__status_danger {
   background-color: #f8d7da;
   border-color: #f5c6cb;
   color: #721c24;
+
+
+}
+
+.block {
+  display: flex;
+  box-sizing: content-box;
+  margin-bottom: 16px;
 }
 
 .form {
@@ -44,7 +62,8 @@ visibility: hidden;
 }
 
 .form_hidden {
-  visibility: hidden;
+ display: none;
+ 
 }
 
 .form__label {
@@ -55,6 +74,7 @@ visibility: hidden;
 
 .form__input {
   border: 1px solid #ced4da;
+  width: 100%;
   border-radius: 1px;
   color: #495057;
   font-size: 1rem;
@@ -63,12 +83,14 @@ visibility: hidden;
 }
 
 .form__button {
+  margin-bottom: 16px;
   border-radius: 4px;
   padding: 0 20px;
   cursor: pointer;
   min-height: 40px;
   max-width: 140px;
-  margin-right: 12px;
+  min-width: 117px;
+  margin: 16px 12px 40px 0;
   border-style: solid;
   border-width: 1px;
   border-color: #c6cdd3;
@@ -77,12 +99,12 @@ visibility: hidden;
   color: #495057;
   font-size: 0.85rem;
   transition: 160ms linear;
- 
+
 }
 
 .form__button_hidden {
-  visibility: hidden;
-  }
+ display: none;
+}
 
 .form__button:hover {
   background-color: #cfd4d8;
@@ -100,16 +122,36 @@ visibility: hidden;
 }
 
 .text {
-margin-bottom: 16px;
+  margin:0;
+
+}
+.text_hidden {
+  display: none;
+
 }
 
 .spinner {
   visibility: hidden;
-  width: 100%;
-  height: 100%;
-  background: url('/src/images/spinner.gif') center no-repeat rgba(0, 0, 0, 0.5);
-  position: fixed;
-}
+  width: 16px;
+  height: 16px;
+  border: 3px solid #cfd4d8;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  margin: 0 10px 0 0
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 
+
 
 .spinner_active {
   visibility: visible;

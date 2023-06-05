@@ -11,14 +11,13 @@ function App() {
     const [infoMessage, setInfoMessage] = React.useState("");
     const [isLoading, setIsLoading] = React.useState(false);
 
-
     //проверка авторизации
     function handleAuthCheck() {
-
         auth.hasAuth()
-        infoMessage
             .then((res) => {
                 setLoggedIn(true);
+                setlogin(login);
+                setInfoMessage("Активен");
             })
             .catch((err) => {
                 console.log(err)
@@ -27,28 +26,28 @@ function App() {
 
     //авторизация
     function handleLogin({ login, passw }) {
-        
+    
+        setIsLoading(true)
         auth.authorize(login, passw)
-            // setIsLoading(true)
+
             .then((res) => {
-                if (res.response === "wrong pass"){
-                    console.log(1)
-                    setLoggedIn(false);
+ 
+                if (res.response === "wrong pass") {
+                    setIsLoading(false)
                     setInfoMessage("Неправильный логин или пароль");
+                    setLoggedIn(false)
                 } else {
-                console.log(res.response)
-
-                setLoggedIn(true);
-                setlogin(login);
-                setInfoMessage("Активен");
-                // setIsLoading(false)
+                    setLoggedIn(true);
+                    setlogin(login);
+                    setInfoMessage("Активен");
                 }
-
             })
             .catch((err) => {
-                        setInfoMessage("Попробуйте позднее");
-                setIsLoading(false);
+                setInfoMessage("Попробуйте позднее");
                 console.log(err);
+            })
+            .finally(() => {
+                setIsLoading(false)
             })
     }
 
@@ -62,7 +61,7 @@ function App() {
 
     return (
 
-        <Login login={login} infoMessage={infoMessage} loggedIn={loggedIn} onLogin={handleLogin} onLogout={handleLogout} />
+        <Login login={login} infoMessage={infoMessage} isLoading={isLoading} loggedIn={loggedIn} onLogin={handleLogin} onLogout={handleLogout} />
 
 
     )
