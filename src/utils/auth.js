@@ -6,12 +6,11 @@ class Auth {
 
     authorize(login, passw) {
         return fetch(`${this._baseUrl}/getAuth`, {
-            method: 'POST',
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({ login, passw })
-
         })
             .then(res => {
                 if (res.ok) return res.json();
@@ -20,24 +19,29 @@ class Auth {
     }
     hasAuth() {
         return fetch(`${this._baseUrl}/hasAuth`, {
-            method: 'POST',
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                member_id: this._member_id,             
+                member_id: this._member_id,
             })
         })
             .then(res => {
-                if (res.body) return res.json();
+                return res.json();
+
             })
-    }
+            .then((data) => {
+                if(data.auth === "N"){
+                    throw new Error('Ошибка member_id')
+                }
+            })
+                }
 
 }
 
 const auth = new Auth({
-    baseUrl: 'https://autoparts-base.ru',
-    member_id:  "bcc2aa0d98a8c7155d417e06b8de7830",
-
+    baseUrl: "https://autoparts-base.ru",
+    member_id: "bcc2aa0d98a8c7155d417e06b8de7830",
 });
 export default auth;

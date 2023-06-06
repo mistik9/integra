@@ -21,20 +21,24 @@ function App() {
             })
             .catch((err) => {
                 console.log(err)
+                setLoggedIn(false);
             })
     }
+    React.useEffect(() => {
+        handleAuthCheck();
+      }, [])
 
     //авторизация
     function handleLogin({ login, passw }) {
-    
+        setlogin("");
         setIsLoading(true)
         auth.authorize(login, passw)
-
-            .then((res) => {
+                .then((res) => {
  
                 if (res.response === "wrong pass") {
                     setIsLoading(false)
                     setInfoMessage("Неправильный логин или пароль");
+                    setlogin(login);
                     setLoggedIn(false)
                 } else {
                     setLoggedIn(true);
@@ -52,18 +56,13 @@ function App() {
     }
 
     function handleLogout() {
-        setLoggedIn(false);
+                setLoggedIn(false);
         setInfoMessage("");
+        setlogin("")
     }
 
-
-
-
     return (
-
         <Login login={login} infoMessage={infoMessage} isLoading={isLoading} loggedIn={loggedIn} onLogin={handleLogin} onLogout={handleLogout} />
-
-
     )
 }
 export default App;

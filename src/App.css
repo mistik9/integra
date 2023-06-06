@@ -5,7 +5,7 @@
   margin: 0;
   padding: 20px 25px;
   border-radius: 10px;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: left;
   font-size: 14;
 }
@@ -17,7 +17,6 @@
 .user_hidden {
  display: none;
 }
-
 
 .user__email {
   font-size: 32px;
@@ -45,8 +44,6 @@ color: #28a745;
   background-color: #f8d7da;
   border-color: #f5c6cb;
   color: #721c24;
-
-
 }
 
 .block {
@@ -63,8 +60,7 @@ color: #28a745;
 
 .form_hidden {
  display: none;
- 
-}
+ }
 
 .form__label {
   margin-bottom: 8px;
@@ -99,7 +95,6 @@ color: #28a745;
   color: #495057;
   font-size: 0.85rem;
   transition: 160ms linear;
-
 }
 
 .form__button_hidden {
@@ -108,13 +103,11 @@ color: #28a745;
 
 .form__button:hover {
   background-color: #cfd4d8;
-
 }
 
 .form__button_active {
   background-color: #3bc8f5;
   color: white;
-
 }
 
 .form__button_active:hover {
@@ -123,11 +116,10 @@ color: #28a745;
 
 .text {
   margin:0;
-
 }
+
 .text_hidden {
   display: none;
-
 }
 
 .spinner {
@@ -151,7 +143,6 @@ color: #28a745;
       transform: rotate(360deg);
   }
   } 
-
 
 .spinner_active {
   visibility: visible;
