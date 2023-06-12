@@ -44,6 +44,12 @@ function App() {
                     setlogin(login);
                     setLoggedIn(false)
 
+                } else if (res.response === "wrong user") {
+                    setIsLoading(false)
+                    setInfoMessage("Неверный имя пользователя");
+                    setlogin(login);
+                    setLoggedIn(false)
+
                 } else if (res.response === "SMS") {
               setLoggedIn(false)
                     setlogin(login);

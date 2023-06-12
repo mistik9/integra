@@ -1,7 +1,8 @@
+
 class Auth {
     constructor(options) {
         this._baseUrl = options.baseUrl;
-        this._member_id = options.member_id
+       
     }
 
     authorize(member_id, login, passw ) {
@@ -11,7 +12,7 @@ class Auth {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                member_id: this._member_id,
+                member_id,
                 login, 
                 passw })
         })
@@ -21,14 +22,14 @@ class Auth {
             })
 
     }
-    hasAuth() {
+    hasAuth(member_id) {
         return fetch(`${this._baseUrl}/hasAuth`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                member_id: this._member_id,
+                member_id,
             })
         })
             .then(res => {
@@ -42,14 +43,14 @@ class Auth {
             })
     }
 
-    sendSMS(code) {
+    sendSMS(member_id, code) {
         return fetch(`${this._baseUrl}/sendSMS`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                member_id: this._member_id,
+                member_id,
                 code,
             })
         })
@@ -62,6 +63,5 @@ class Auth {
 
 const auth = new Auth({
     baseUrl: "https://autoparts-base.ru/dev",
-    member_id: "bcc2aa0d98a8c7155d417e06b8de7830",
 });
 export default auth;
