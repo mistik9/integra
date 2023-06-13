@@ -9,22 +9,22 @@ function App() {
     const [isLoading, setIsLoading] = React.useState(false);
     const [isSms, setIsSms] = React.useState(false);
     const [beforeAuth, setBeforeAuth] = React.useState(false);
-    // //проверка авторизации
-    // function handleAuthCheck() {
-    //     auth.hasAuth()
-    //         .then((res) => {
-    //             setLoggedIn(true);
-    //             setlogin(login);
-    //             setInfoMessage("Активен");
-    //         })
-    //         .catch((err) => {
-    //             console.log(err)
-    //             setLoggedIn(false);
-    //         })
-    // }
-    // React.useEffect(() => {
-    //     handleAuthCheck();
-    // }, [])
+    //проверка авторизации
+    function handleAuthCheck() {
+        auth.hasAuth()
+            .then((res) => {
+                setLoggedIn(true);
+                setlogin(login);
+                setInfoMessage("Активен");
+            })
+            .catch((err) => {
+                console.log(err)
+                setLoggedIn(false);
+            })
+    }
+    React.useEffect(() => {
+        handleAuthCheck();
+    }, [])
 
     //авторизация
     function handleLogin({ member_id, login, passw }) {
@@ -46,7 +46,7 @@ function App() {
 
                 } else if (res.response === "wrong user") {
                     setIsLoading(false)
-                    setInfoMessage("Неверный имя пользователя");
+                    setInfoMessage("Неверное имя пользователя");
                     setlogin(login);
                     setLoggedIn(false)
 
@@ -58,7 +58,7 @@ function App() {
                 }
             })
             .catch((err) => {
-                setInfoMessage("ошибка приложения, попробуйте через некоторое время ");
+                setInfoMessage("Ошибка приложения, попробуйте через некоторое время ");
                 console.log(err);
             })
             .finally(() => {
