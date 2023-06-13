@@ -29,17 +29,21 @@ function Login({ onLogin, beforeAuth, onSendSms, infoMessage, isLoading, loggedI
 
   return (
     <div class="page">
-      <div class={`user ${!isLoading ? "user_hidden" : ""}`}>
+      {/* <div class={`user ${!isLoading ? "user_hidden" : ""}`}>
         <h2 class={`user__email ${!isLoading ? "user__email_hidden" : ""}`}>{login}</h2>
         <div class="block">
           <span class="spinner spinner_active"></span>
           <p class="text">Аутентификация</p>
         </div>
-      </div>
+      </div> */}
       <div class="user">
-        <h2 class={`user__email ${!setlogin ? "user__email_hidden" : ""}`}>{login}</h2>
+        <h2 class={`user__email ${beforeAuth ? "user__email_hidden" : ""}`}>{login}</h2>
+        <div class={`block ${!isLoading ? "block_hidden" : ""}`}>
+          <span class="spinner spinner_active"></span>
+          <p class="text">Аутентификация</p>
+        </div>
         <div class={`user__status ${infoMessage === "Активен" ? "user__status_active" :
-          infoMessage === "Неверный пароль" ? "user__status_danger" : ""}`}>{infoMessage}</div>
+          infoMessage === "" ? "" : "user__status_danger"}`}>{infoMessage}</div>
         <button class={`form__button ${!loggedIn ? "form__button_hidden" : "form__button_active"}`} onClick={onLogout}>Выйти</button>
       </div>
       <form class={`form ${loggedIn || isSms? "form_hidden" : ""}`} onSubmit={handleSubmit} >

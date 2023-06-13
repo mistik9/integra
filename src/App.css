@@ -23,7 +23,7 @@
   margin-bottom: 8px;
 }
 .user__email_hidden {
-  visibility: hidden;
+  display: none;
 }
 
 .user__status {
@@ -50,6 +50,10 @@ color: #28a745;
   display: flex;
   box-sizing: content-box;
   margin-bottom: 16px;
+}
+
+.block_hidden {
+  display: none;
 }
 
 .form {
@@ -84,8 +88,8 @@ color: #28a745;
   padding: 0 20px;
   cursor: pointer;
   min-height: 40px;
-  max-width: 140px;
-  min-width: 117px;
+  width: 140px;
+
   margin: 16px 12px 40px 0;
   border-style: solid;
   border-width: 1px;
