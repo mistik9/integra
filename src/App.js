@@ -12,8 +12,7 @@ function App() {
 
 // проверка авторизации
     function handleAuthCheck() {
-
-        auth.hasAuth()
+        auth.hasAuth(member_id)
             .then((res) => {
                 if (res.auth === "N") {
                     setLoggedIn(false);
