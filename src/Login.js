@@ -29,13 +29,6 @@ function Login({ onLogin, beforeAuth, onSendSms, infoMessage, isLoading, loggedI
 
   return (
     <div class="page">
-      {/* <div class={`user ${!isLoading ? "user_hidden" : ""}`}>
-        <h2 class={`user__email ${!isLoading ? "user__email_hidden" : ""}`}>{login}</h2>
-        <div class="block">
-          <span class="spinner spinner_active"></span>
-          <p class="text">Аутентификация</p>
-        </div>
-      </div> */}
       <div class="user">
         <h2 class={`user__email ${beforeAuth ? "user__email_hidden" : ""}`}>{login}</h2>
         <div class={`block ${!isLoading ? "block_hidden" : ""}`}>
@@ -52,22 +45,22 @@ function Login({ onLogin, beforeAuth, onSendSms, infoMessage, isLoading, loggedI
         <label class="form__label">Пароль</label>
         <input id="password" type="password" class="form__input " required value={passw} onChange={handleChangePassword} />
         <div>
-          <button class="form__button form__button_active" onclick={setlogin}>ПОДКЛЮЧИТЬ</button>
-          <button class="form__button" >ОТМЕНА</button>
+          <button class="form__button form__button_active"  type="submit" onclick={setlogin}>ПОДКЛЮЧИТЬ</button>
+          <button class="form__button" type="reset" onClick={onLogout} >ОТМЕНА</button>
         </div>
       </form>
       <form class={`form ${isSms? "" : "form_hidden"}`} onSubmit={handleSubmitSms} >
         <label class="form__label">Код из СМС</label>
         <input id="sms" type="password" class="form__input " required value={code} onChange={handleChangeSms} />
         <div>
-        <button class="form__button form__button_active" onclick={setCode}>ПОДКЛЮЧИТЬ</button>
-        <button class="form__button" onClick={onLogout} >ОТМЕНА</button>
+        <button class="form__button form__button_active"  type="submit" onclick={setCode}>ПОДКЛЮЧИТЬ</button>
+        <button class="form__button" type="reset" onClick={onLogout} >ОТМЕНА</button>
         </div>
       </form>
       <div>
         <p class="text">Для получения помощи перейдите в мессенджер:</p>
-        <button class="form__button" aria-label="WhatsApp"><a class="form__link" href= "https://wa.me/79958454368?text=">WHATSAPP</a></button>
-        <button class="form__button" aria-label="Telegram"><a class="form__link" href ="https://t.me/+79958454368">TELEGRAM</a></button>
+        <button class="form__button" aria-label="WhatsApp"><a class="form__link" href= "https://wa.me/79958454368?text=" target="_blank" rel="noreferrer" >WHATSAPP</a></button>
+        <button class="form__button" aria-label="Telegram"><a class="form__link" href ="https://t.me/+79958454368" target="_blank" rel="noreferrer" >TELEGRAM</a></button>
       </div>
     </div >
   );

@@ -77,6 +77,7 @@ class Auth {
 
 const auth = new Auth({
     baseUrl: "https://autoparts-base.ru/dev",
-    member_id: 'bcc2aa0d98a8c7155d417e06b8de7830',
+    // member_id: 'bcc2aa0d98a8c7155d417e06b8de7830',
+    member_id: this._member_id
 });
 export default auth;

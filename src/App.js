@@ -10,35 +10,34 @@ function App() {
     const [isSms, setIsSms] = React.useState(false);
     const [beforeAuth, setBeforeAuth] = React.useState(true);
 
-    //проверка авторизации
-    // function handleAuthCheck() {
+// проверка авторизации
+    function handleAuthCheck() {
 
-    //     auth.hasAuth()
-    //         .then((res) => {
-    //             if (res.auth === "N") {
-    //                 setLoggedIn(false);
-    //             } else {
-    //                 setLoggedIn(true);
-    //                 setlogin(login);
-    //                 setInfoMessage("Активен");
-    //             }
-    //         })
-    //         .catch((err) => {
-    //             setInfoMessage("Ошибка приложения, попробуйте через некоторое время ");
-    //             console.log(err)
-    //         })
-    // }
+        auth.hasAuth()
+            .then((res) => {
+                if (res.auth === "N") {
+                    setLoggedIn(false);
+                } else {
+                    setLoggedIn(true);
+                    setlogin(login);
+                    setInfoMessage("Активен");
+                }
+            })
+            .catch((err) => {
+                setInfoMessage("Ошибка приложения, попробуйте через некоторое время ");
+                console.log(err)
+            })
+    }
 
-    // React.useEffect(() => {
-    //     handleAuthCheck();
-    // }, [])
+    React.useEffect(() => {
+        handleAuthCheck();
+    }, [])
 
     //авторизация
     function handleLogin({ member_id, login, passw }) {
         setIsLoading(true);
-        setBeforeAuth(false);
+        // setBeforeAuth(false);
         auth.authorize(member_id, login, passw)
-
             .then((res) => {
 
                 if (res.response === "OK") {
@@ -66,9 +65,6 @@ function App() {
                     setInfoMessage("Введите код из СМС");
                     setIsSms(true);
                     setBeforeAuth(false)
-
-
-
                 }
             })
             .catch((err) => {
@@ -97,7 +93,6 @@ function App() {
                     setInfoMessage("Неверный пароль");
                     setlogin(login);
                     setLoggedIn(false);
-
                 }
             })
             .catch((err) => {
@@ -113,12 +108,12 @@ function App() {
     function handleLogout() {
         auth.signout()
             .then((res) => {
+                console.log(res)
                 if (res.auth === "N") {
                     setLoggedIn(false);
                     setBeforeAuth(true);
                     setInfoMessage("");
                     setlogin("");
-                    setIsSms(false);
                 }
             })
             .catch((err) => {
