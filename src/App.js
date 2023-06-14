@@ -11,7 +11,7 @@ function App() {
     const [beforeAuth, setBeforeAuth] = React.useState(true);
 
 // проверка авторизации
-    function handleAuthCheck() {
+    function handleAuthCheck(member_id) {
         auth.hasAuth(member_id)
             .then((res) => {
                 if (res.auth === "N") {
