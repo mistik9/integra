@@ -66,8 +66,8 @@ function Login({ onLogin, beforeAuth, onSendSms, infoMessage, isLoading, loggedI
       </form>
       <div>
         <p class="text">Для получения помощи перейдите в мессенджер:</p>
-        <button class="form__button" aria-label="WhatsApp">WHATSAPP</button>
-        <button class="form__button" aria-label="Telegram">TELEGRAM</button>
+        <button class="form__button" aria-label="WhatsApp"><a class="form__link" href= "https://wa.me/79958454368?text=">WHATSAPP</a></button>
+        <button class="form__button" aria-label="Telegram"><a class="form__link" href ="https://t.me/+79958454368">TELEGRAM</a></button>
       </div>
     </div >
   );

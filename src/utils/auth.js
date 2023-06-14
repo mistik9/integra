@@ -1,4 +1,4 @@
-import   { member_id }  from '../vendor';
+import { member_id } from '../vendor';
 
 class Auth {
     constructor(options) {
@@ -6,7 +6,7 @@ class Auth {
         this._member_id = options.member_id
     }
 
-    authorize(member_id, login, passw ) {
+    authorize(member_id, login, passw) {
         return fetch(`${this._baseUrl}/getAuth`, {
             method: "POST",
             headers: {
@@ -14,8 +14,9 @@ class Auth {
             },
             body: JSON.stringify({
                 member_id: this._member_id,
-                login, 
-                passw })
+                login,
+                passw
+            })
         })
             .then(res => {
                 if (res.ok) return res.json();
@@ -37,11 +38,6 @@ class Auth {
                 return res.json();
 
             })
-            .then((data) => {
-                if (data.auth === "N") {
-                    throw new Error('Ошибка member_id')
-                }
-            })
     }
 
     sendSMS(code) {
@@ -55,10 +51,27 @@ class Auth {
                 code,
             })
         })
-            .then(res =>  {
+            .then(res => {
                 return res.json();
 
             })
+    }
+
+    signout() {
+        return fetch(`${this._baseUrl}/exitAuth`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                member_id: this._member_id,
+            })
+        })
+            .then(res => {
+                return res.json();
+
+            })
+
     }
 }
 

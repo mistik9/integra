@@ -95,7 +95,6 @@ color: #28a745;
   border-width: 1px;
   border-color: #c6cdd3;
   background-color: white;
-  text-decoration: none;
   color: #495057;
   font-size: 0.85rem;
   transition: 160ms linear;
@@ -116,6 +115,11 @@ color: #28a745;
 
 .form__button_active:hover {
   background-color: #3eddff;
+}
+
+.form__link{
+  text-decoration: none;
+  color: #495057;
 }
 
 .text {

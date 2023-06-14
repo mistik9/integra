@@ -12,28 +12,33 @@ function App() {
 
     //проверка авторизации
     // function handleAuthCheck() {
+
     //     auth.hasAuth()
     //         .then((res) => {
-    //             setLoggedIn(true);
-    //             setlogin(login);
-    //             setInfoMessage("Активен");
+    //             if (res.auth === "N") {
+    //                 setLoggedIn(false);
+    //             } else {
+    //                 setLoggedIn(true);
+    //                 setlogin(login);
+    //                 setInfoMessage("Активен");
+    //             }
     //         })
     //         .catch((err) => {
+    //             setInfoMessage("Ошибка приложения, попробуйте через некоторое время ");
     //             console.log(err)
-    //             setLoggedIn(false);
     //         })
     // }
+
     // React.useEffect(() => {
     //     handleAuthCheck();
     // }, [])
 
     //авторизация
     function handleLogin({ member_id, login, passw }) {
-        console.log('before', beforeAuth);
-        setBeforeAuth(false);
         setIsLoading(true);
+        setBeforeAuth(false);
         auth.authorize(member_id, login, passw)
-        
+
             .then((res) => {
 
                 if (res.response === "OK") {
@@ -42,13 +47,11 @@ function App() {
                     setInfoMessage("Активен");
                     setIsSms(false);
 
-
                 } else if (res.response === "wrong pass") {
                     setIsLoading(false);
                     setInfoMessage("Неверный пароль");
                     setlogin(login);
                     setLoggedIn(false);
-
 
                 } else if (res.response === "wrong user") {
                     setIsLoading(false)
@@ -56,15 +59,15 @@ function App() {
                     setlogin(login);
                     setLoggedIn(false);
 
-
                 } else if (res.response === "SMS") {
                     setLoggedIn(false);
                     setIsLoading(false);
                     setlogin(login);
                     setInfoMessage("Введите код из СМС");
                     setIsSms(true);
-                   
-                    console.log('sms', beforeAuth);
+                    setBeforeAuth(false)
+
+
 
                 }
             })
@@ -74,27 +77,26 @@ function App() {
             })
             .finally(() => {
                 setIsLoading(false);
-                            })
+
+            })
     }
 
     function sendSMS(code) {
+        setIsLoading(true);
         setBeforeAuth(false);
-        console.log('sendsms', beforeAuth);
         auth.sendSMS(code)
             .then((res) => {
                 if (res.response === "OK") {
-                    setLoggedIn(false)
+                    setLoggedIn(true)
                     setlogin(login);
                     setInfoMessage("Активен");
                     setIsSms(false);
-                    setBeforeAuth(false);
 
                 } else if (res.response === "wrong pass") {
                     setIsLoading(false)
                     setInfoMessage("Неверный пароль");
                     setlogin(login);
                     setLoggedIn(false);
-
 
                 }
             })
@@ -103,17 +105,26 @@ function App() {
                 console.log(err);
             })
             .finally(() => {
-                setBeforeAuth(false)
+                setBeforeAuth(false);
+                setIsLoading(false);
             })
     }
 
     function handleLogout() {
-        setBeforeAuth(true);
-        setLoggedIn(false);
-        setInfoMessage("");
-        setlogin("");
-        console.log('logout', beforeAuth)
-
+        auth.signout()
+            .then((res) => {
+                if (res.auth === "N") {
+                    setLoggedIn(false);
+                    setBeforeAuth(true);
+                    setInfoMessage("");
+                    setlogin("");
+                    setIsSms(false);
+                }
+            })
+            .catch((err) => {
+                setInfoMessage("ошибка приложения, попробуйте через некоторое время");
+                console.log(err);
+            })
 
     }
 
