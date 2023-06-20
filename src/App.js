@@ -10,32 +10,39 @@ function App() {
     const [isSms, setIsSms] = React.useState(false);
     const [beforeAuth, setBeforeAuth] = React.useState(true);
 
-// проверка авторизации
-    function handleAuthCheck(member_id) {
-        auth.hasAuth(member_id)
-            .then((res) => {
-                if (res.auth === "N") {
-                    setLoggedIn(false);
-                } else {
-                    setLoggedIn(true);
-                    setlogin(login);
-                    setInfoMessage("Активен");
-                }
-            })
-            .catch((err) => {
-                setInfoMessage("Ошибка приложения, попробуйте через некоторое время ");
-                console.log(err)
-            })
-    }
+    let controller = new AbortController();
+            React.useEffect(() => {
+                controller();
+        }, [])
 
-    React.useEffect(() => {
-        handleAuthCheck();
-    }, [])
+    // // проверка авторизации
+    //     function handleAuthCheck(member_id) {
+    //         auth.hasAuth(member_id)
+    //             .then((res) => {
+    //                 if (res.auth === "N") {
+    //                     setLoggedIn(false);
+    //                 } else {
+    //                     setLoggedIn(true);
+    //                     setlogin(login);
+    //                     setInfoMessage("Активен");
+    //                 }
+    //             })
+    //             .catch((err) => {
+    //                 setInfoMessage("Ошибка приложения, попробуйте через некоторое время ");
+    //                 console.log(err)
+    //             })
+    //     }
 
+    //     React.useEffect(() => {
+    //         handleAuthCheck();
+    //     }, [])
+
+
+    console.log("before", beforeAuth)
     //авторизация
     function handleLogin({ member_id, login, passw }) {
         setIsLoading(true);
-        // setBeforeAuth(false);
+        setBeforeAuth(false);
         auth.authorize(member_id, login, passw)
             .then((res) => {
 
@@ -64,6 +71,7 @@ function App() {
                     setInfoMessage("Введите код из СМС");
                     setIsSms(true);
                     setBeforeAuth(false)
+
                 }
             })
             .catch((err) => {
@@ -99,20 +107,30 @@ function App() {
                 console.log(err);
             })
             .finally(() => {
-                setBeforeAuth(false);
                 setIsLoading(false);
             })
     }
 
+function handleCancel() {
+    setBeforeAuth(true);
+    setLoggedIn(false);
+    setIsLoading(false)
+    setInfoMessage("");
+    setlogin("");
+    setIsSms(false);
+}
+
     function handleLogout() {
+        setBeforeAuth(true);
         auth.signout()
             .then((res) => {
-                console.log(res)
                 if (res.auth === "N") {
-                    setLoggedIn(false);
                     setBeforeAuth(true);
+                    setLoggedIn(false);
+                    setIsLoading(false)
                     setInfoMessage("");
                     setlogin("");
+                    setIsSms(false);
                 }
             })
             .catch((err) => {
@@ -132,7 +150,8 @@ function App() {
             isSms={isSms}
             onSendSms={sendSMS}
             onLogin={handleLogin}
-            onLogout={handleLogout} />
+            onLogout={handleLogout}
+            onCancel={handleCancel} />
     )
 }
 export default App;

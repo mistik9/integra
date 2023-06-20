@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 
-function Login({ onLogin, beforeAuth, onSendSms, infoMessage, isLoading, loggedIn, isSms, onLogout }) {
+function Login({ onLogin, beforeAuth, onSendSms, infoMessage, isLoading, loggedIn, isSms, onLogout, onCancel }) {
   const [login, setlogin] = React.useState("");
   const [passw, setPassw] = React.useState("");
   const [code, setCode] = React.useState("");
@@ -46,7 +46,7 @@ function Login({ onLogin, beforeAuth, onSendSms, infoMessage, isLoading, loggedI
         <input id="password" type="password" class="form__input " required value={passw} onChange={handleChangePassword} />
         <div>
           <button class="form__button form__button_active"  type="submit" onclick={setlogin}>ПОДКЛЮЧИТЬ</button>
-          <button class="form__button" type="reset" onClick={onLogout} >ОТМЕНА</button>
+          <button class="form__button" type="reset" onClick={onCancel} >ОТМЕНА</button>
         </div>
       </form>
       <form class={`form ${isSms? "" : "form_hidden"}`} onSubmit={handleSubmitSms} >
@@ -54,7 +54,7 @@ function Login({ onLogin, beforeAuth, onSendSms, infoMessage, isLoading, loggedI
         <input id="sms" type="password" class="form__input " required value={code} onChange={handleChangeSms} />
         <div>
         <button class="form__button form__button_active"  type="submit" onclick={setCode}>ПОДКЛЮЧИТЬ</button>
-        <button class="form__button" type="reset" onClick={onLogout} >ОТМЕНА</button>
+        <button class="form__button" type="reset" onClick={onCancel} >ОТМЕНА</button>
         </div>
       </form>
       <div>
