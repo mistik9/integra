@@ -10,10 +10,8 @@ function App() {
     const [isSms, setIsSms] = React.useState(false);
     const [beforeAuth, setBeforeAuth] = React.useState(true);
 
-    let controller = new AbortController();
-            React.useEffect(() => {
-                controller();
-        }, [])
+    
+
 
     // // проверка авторизации
     //     function handleAuthCheck(member_id) {
@@ -83,6 +81,13 @@ function App() {
 
             })
     }
+
+   
+    React.useEffect(() => {
+        const controller = new AbortController();
+        handleLogin(controller);
+        return () => controller.abort()
+}, [handleLogin])
 
     function sendSMS(code) {
         setIsLoading(true);
