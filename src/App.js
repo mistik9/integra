@@ -10,35 +10,31 @@ function App() {
     const [isSms, setIsSms] = React.useState(false);
     const [beforeAuth, setBeforeAuth] = React.useState(true);
 
-    
+    // проверка авторизации
+        function handleAuthCheck(member_id) {
+            auth.hasAuth(member_id)
+                .then((res) => {
+                    if (res.auth === "N") {
+                        setLoggedIn(false);
+                    } else {
+                        setLoggedIn(true);
+                        setlogin(login);
+                        setInfoMessage("Активен");
+                    }
+                })
+                .catch((err) => {
+                    setInfoMessage("Ошибка приложения, попробуйте через некоторое время ");
+                    console.log(err)
+                })
+        }
 
+        React.useEffect(() => {
+            handleAuthCheck();
+        }, [])
 
-    // // проверка авторизации
-    //     function handleAuthCheck(member_id) {
-    //         auth.hasAuth(member_id)
-    //             .then((res) => {
-    //                 if (res.auth === "N") {
-    //                     setLoggedIn(false);
-    //                 } else {
-    //                     setLoggedIn(true);
-    //                     setlogin(login);
-    //                     setInfoMessage("Активен");
-    //                 }
-    //             })
-    //             .catch((err) => {
-    //                 setInfoMessage("Ошибка приложения, попробуйте через некоторое время ");
-    //                 console.log(err)
-    //             })
-    //     }
-
-    //     React.useEffect(() => {
-    //         handleAuthCheck();
-    //     }, [])
-
-
-    console.log("before", beforeAuth)
     //авторизация
     function handleLogin({ member_id, login, passw }) {
+        setInfoMessage("");
         setIsLoading(true);
         setBeforeAuth(false);
         auth.authorize(member_id, login, passw)
@@ -73,21 +69,21 @@ function App() {
                 }
             })
             .catch((err) => {
-                setInfoMessage("Ошибка приложения, попробуйте через некоторое время ");
-                console.log(err);
-            })
+                if (err.name === "AbortError") {
+                    setInfoMessage("Прервано пользователем");
+                    console.log(err)
+
+                } else
+                    setInfoMessage("ошибка приложения, попробуйте через некоторое время")
+                console.log(err)
+            }
+            )
             .finally(() => {
                 setIsLoading(false);
 
             })
     }
 
-   
-    React.useEffect(() => {
-        const controller = new AbortController();
-        handleLogin(controller);
-        return () => controller.abort()
-}, [handleLogin])
 
     function sendSMS(code) {
         setIsLoading(true);
@@ -108,7 +104,7 @@ function App() {
                 }
             })
             .catch((err) => {
-                setInfoMessage("ошибка приложения, попробуйте через некоторое время ");
+                setInfoMessage("ошибка приложения, попробуйте через некоторое время");
                 console.log(err);
             })
             .finally(() => {
@@ -116,14 +112,15 @@ function App() {
             })
     }
 
-function handleCancel() {
-    setBeforeAuth(true);
-    setLoggedIn(false);
-    setIsLoading(false)
-    setInfoMessage("");
-    setlogin("");
-    setIsSms(false);
-}
+    function handleCancel() {
+        auth._controller.abort();
+        setBeforeAuth(true);
+        setLoggedIn(false);
+        setIsLoading(false)
+        setInfoMessage("");
+        setlogin("");
+        setIsSms(false);
+    }
 
     function handleLogout() {
         setBeforeAuth(true);
