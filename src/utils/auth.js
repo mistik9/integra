@@ -1,13 +1,17 @@
 import { member_id } from '../vendor';
 
+
 class Auth {
     constructor(options) {
         this._baseUrl = options.baseUrl;
-        this._member_id = options.member_id
+        this._member_id = options.member_id;
+        this._controller = null;
     }
 
     authorize(member_id, login, passw) {
+        this._controller = new AbortController();
         return fetch(`${this._baseUrl}/getAuth`, {
+            signal: this._controller.signal,
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -17,6 +21,7 @@ class Auth {
                 login,
                 passw
             })
+
         })
             .then(res => {
                 if (res.ok) return res.json();

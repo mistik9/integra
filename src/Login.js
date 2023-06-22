@@ -36,7 +36,7 @@ function Login({ onLogin, beforeAuth, onSendSms, infoMessage, isLoading, loggedI
           <p class="text">Аутентификация</p>
         </div>
         <div class={`user__status ${infoMessage === "Активен" ? "user__status_active" :
-          infoMessage === "" ? "" : "user__status_danger"}`}>{infoMessage}</div>
+          infoMessage === "Введите код из СМС" ? "" : infoMessage === ""? "": "user__status_danger"}`}>{infoMessage}</div>
         <button class={`form__button ${!loggedIn ? "form__button_hidden" : "form__button_active"}`} onClick={onLogout}>Выйти</button>
       </div>
       <form class={`form ${loggedIn || isSms? "form_hidden" : ""}`} onSubmit={handleSubmit} >
